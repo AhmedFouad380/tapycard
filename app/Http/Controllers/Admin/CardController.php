@@ -74,18 +74,19 @@ class CardController extends Controller
         ]);
 
 
+        $image = QrCode::format('png')
+            ->size(200)->errorCorrection('H')
+            ->generate('https://s.tapycard.com/'.$request->serial);
+        $output_file = '/img/qr-code/img-' . time() . '.png';
+        Storage::disk('local')->put($output_file, $image);
+
         $user = new Card;
         $user->serial=$request->serial;
         $user->secret='SECRET123';
         $user->is_active=$request->is_active;
         $user->type=$request->type;
+        $user->qrcode=$request->qrcode;
         $user->save();
-
-//        $image = QrCode::format('png')
-//            ->size(200)->errorCorrection('H')
-//            ->generate('https://s.tapycard.com/'.$request->serial);
-//        $output_file = '/img/qr-code/img-' . time() . '.png';
-//        Storage::disk('local')->put($output_file, $image);
 
         return redirect()->back()->with('message', 'تم الاضافة بنجاح ');
 
