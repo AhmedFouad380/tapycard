@@ -85,7 +85,7 @@ class CardController extends Controller
         $user->secret='SECRET123';
         $user->is_active=$request->is_active;
         $user->type=$request->type;
-        $user->qrcode=$request->qrcode;
+        $user->qrcode=$output_file;
         $user->save();
 
         return redirect()->back()->with('message', 'تم الاضافة بنجاح ');
