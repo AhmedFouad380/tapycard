@@ -38,7 +38,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Admin-edit/{id}', [\App\Http\Controllers\Admin\AdminController::class, 'edit']);
     Route::post('update-Admin', [\App\Http\Controllers\Admin\AdminController::class, 'update']);
     Route::get('/add-button-Admin', function () {
-        return view('admin/Admin/button');
+        return view('Admin/Admin/button');
     });
 
     Route::get('Card_setting', [\App\Http\Controllers\Admin\CardController::class, 'index']);
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Card-edit/{id}', [\App\Http\Controllers\Admin\CardController::class, 'edit']);
     Route::post('update-Card', [\App\Http\Controllers\Admin\CardController::class, 'update']);
     Route::get('/add-button-Card', function () {
-        return view('admin/Card/button');
+        return view('Admin/Card/button');
     });
 
     Route::get('Profile_setting', [\App\Http\Controllers\Admin\ProfileController::class, 'index']);
@@ -58,7 +58,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Profile-edit/{id}', [\App\Http\Controllers\Admin\ProfileController::class, 'edit']);
     Route::post('update-Profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update']);
     Route::get('/add-button-Profile', function () {
-        return view('admin/Profile/button');
+        return view('Admin/Profile/button');
     });
     Route::get('get-Profiles/{id}', [\App\Http\Controllers\Admin\ProfileController::class, 'getProfiles']);
 
@@ -68,21 +68,21 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('store-Profile_elements', [\App\Http\Controllers\Admin\ProfileElementsController::class, 'store']);
 
     Route::get('/add-button-social/{id}', function ($id) {
-        return view('admin/ProfileElements/socialButton',compact('id'));
+        return view('Admin/ProfileElements/socialButton',compact('id'));
     });
     Route::get('/add-button-LinksButton/{id}', function ($id) {
-        return view('admin/ProfileElements/LinksButton',compact('id'));
+        return view('Admin/ProfileElements/LinksButton',compact('id'));
     });
     Route::get('/add-button-ImagesButton/{id}', function ($id) {
-        return view('admin/ProfileElements/ImagesButton',compact('id'));
+        return view('Admin/ProfileElements/ImagesButton',compact('id'));
     });
 
     Route::get('/add-button-VideoButton/{id}', function ($id) {
-        return view('admin/ProfileElements/VideoButton',compact('id'));
+        return view('Admin/ProfileElements/VideoButton',compact('id'));
     });
 
     Route::get('/add-button-ContactButton/{id}', function ($id) {
-        return view('admin/ProfileElements/ContactButton',compact('id'));
+        return view('Admin/ProfileElements/ContactButton',compact('id'));
     });
 
     Route::post('Store_BusinessHours',[\App\Http\Controllers\Admin\ProfileElementsController::class,'Store_BusinessHours']);
@@ -90,7 +90,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('delete-Appointments', [\App\Http\Controllers\Admin\AppointmentController::class, 'destroy']);
     Route::post('store-Appointments', [\App\Http\Controllers\Admin\AppointmentController::class, 'store']);
     Route::get('/add-button-Appointments/{id}', function ($id) {
-        return view('admin/ProfileElements/AppointmentsButton',compact('id'));
+        return view('Admin/ProfileElements/AppointmentsButton',compact('id'));
     });
 
 
@@ -101,7 +101,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('AppointmentsRelation-edit/{id}', [\App\Http\Controllers\Admin\AppointmentsRelationController::class, 'edit']);
     Route::post('update-AppointmentsRelation', [\App\Http\Controllers\Admin\AppointmentsRelationController::class, 'update']);
     Route::get('/add-button-AppointmentsRelation', function () {
-        return view('admin/AppointmentsRelation/button');
+        return view('Admin/AppointmentsRelation/button');
     });
 
         Route::get('ExchangeContact_setting', [\App\Http\Controllers\Admin\ExhangeContactController::class, 'index']);
@@ -111,7 +111,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('ExchangeContact-edit/{id}', [\App\Http\Controllers\Admin\ExhangeContactController::class, 'edit']);
     Route::post('update-ExchangeContact', [\App\Http\Controllers\Admin\ExhangeContactController::class, 'update']);
     Route::get('/add-button-ExchangeContact', function () {
-        return view('admin/ExchangeContact/button');
+        return view('Admin/ExchangeContact/button');
     });
 
 });
