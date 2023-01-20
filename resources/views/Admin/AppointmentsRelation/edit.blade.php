@@ -26,7 +26,7 @@
                     <li class="breadcrumb-item text-muted">
                         <a href="{{url('/')}}" class="text-muted">{{__('lang.Dashboard')}}</a>
                     </li>
-                    <li class="breadcrumb-item text-muted">{{__('lang.Admins')}}</li>
+                    <li class="breadcrumb-item text-muted">{{__('lang.AppointmentsRelation')}}</li>
                     <li class="breadcrumb-item text-muted">{{__('lang.Users_Edit')}}</li>
 
                 </ul>
@@ -138,7 +138,7 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form id="kt_account_profile_details_form" action="{{url('update-Admin')}}" class="form"
+                    <form id="kt_account_profile_details_form" action="{{url('update-AppointmentsRelation')}}" class="form"
                           method="post">
                     @csrf
                     <!--begin::Card body-->
@@ -146,12 +146,12 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.name')}}</label>
+                                <label class="required fw-bold fs-6 mb-2">{{__('lang.date')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="name"
+                                <input type="date" name="date"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="" value="{{$employee->name}}" required/>
+                                       placeholder="" value="{{$employee->date}}" required/>
 
                                 <input type="hidden" name="id" value="{{$employee->id}}" required/>
                                 <!--end::Input-->
@@ -159,66 +159,64 @@
                             <!--end::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.email')}}</label>
+                                <label class="required fw-bold fs-6 mb-2">{{__('lang.Start Time')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="email" name="email"
+                                <input type="time" name="start_time"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="البريد الالكتروني" value="{{$employee->email}}"
-                                       />
+                                       placeholder="" value="{{$employee->start_time}}"
+                                />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.phone')}}</label>
+                                <label class="required fw-bold fs-6 mb-2">{{__('lang.End Time')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="tel" name="phone" id="phone" maxlength="8" minlength="8"
+                                <input type="time" name="end_time"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="رقم الهاتف" value="{{$employee->phone}}" required/>
+                                       placeholder="" value="{{$employee->end_time}}" required/>
                                 <!--end::Input-->
                                 <span id="error-validation" style="color:red"></span>
 
                                 <!--end::Input-->
                             </div>
 
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.password')}}</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="password" name="password"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="" value="" />
-                                <!--end::Input-->
-                            </div>
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.Confirm password')}}</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="password" name="password_confirmation"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="" value=""/>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
                             <!--end::Input group-->
                             <div class="fv-row mb-7">
-                                <div
-                                    class="form-check form-switch form-check-custom form-check-solid">
-                                    <label class="form-check-label" for="flexSwitchDefault">{{__('lang.active')}}
-                                        ؟</label>
-                                    <input class="form-check-input" name="is_active" type="hidden"
-                                           value="inactive" id="flexSwitchDefault"/>
-                                    <input class="form-check-input form-control form-control-solid mb-3 mb-lg-0"
-                                           name="is_active" type="checkbox"
-                                           value="active" id="flexSwitchDefault"
-                                           @if($employee->is_active == 'active') checked @endif />
+                                <!--begin::Label-->
+                                <label class="required fw-bold fs-6 mb-2">{{__('lang.status')}}</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select class="form-control" name="states">
+                                    <option value="new" @if($employee->states == 'new') selected @endif  >{{__('lang.new')}}</option>
+                                    <option value="complate"  @if($employee->complate == 'new') selected @endif >{{__('lang.complete')}}</option>
+                                </select>
+
+                                <!--end::Input-->
+                            </div>
+
+
+                            <!--end::Input group-->
+                            <!--end::Input group-->
+                            @if(Auth::guard('admin')->check())
+
+                                <div class="fv-row mb-7">
+                                    <div
+                                        class="form-check form-switch form-check-custom form-check-solid">
+                                        <label class="form-check-label" for="flexSwitchDefault">{{__('lang.Delete')}}
+                                            ؟</label>
+                                        <input class="form-check-input" name="is_deleted" type="hidden"
+                                               value="0" id="flexSwitchDefault"/>
+                                        <input class="form-check-input form-control form-control-solid mb-3 mb-lg-0"
+                                               name="is_deleted" type="checkbox"
+                                               value="1" id="flexSwitchDefault"
+                                               @if($employee->is_deleted == 1) checked @endif />
+                                    </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
+                        @endif
+                        <!--end::Input group-->
 
 
                         </div>

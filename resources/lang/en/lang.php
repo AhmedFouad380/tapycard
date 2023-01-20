@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'UserName' => 'User Name  ',
+    'UserName' => 'Username  ',
     'Regions' => 'Regions ',
     'Branches' => 'Branches ',
     'Region' => 'Region ',
@@ -91,7 +91,7 @@ return [
     'Date' => 'Date',
     'time' => 'Time ',
     'createEvent' => 'Create Event ',
-    'Settings' => 'control panel',
+    'Setting' => 'Settings',
     'Notification' => 'Notification',
     'alerts' => 'alerts',
     'NewInbox' => 'New Inbox',

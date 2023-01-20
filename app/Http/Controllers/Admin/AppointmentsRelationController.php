@@ -175,28 +175,20 @@ class AppointmentsRelationController extends Controller
     public function update(Request $request)
     {
         $data = $this->validate(request(), [
-            'name' => 'required|string',
-            'id' => 'required|exists:users,id',
-            'email' => 'required|email|unique:admins,email,' . $request->id,
-            'password' => 'nullable|confirmed',
-            'phone' => 'required|min:8|unique:admins,phone,' . $request->id,
-            'is_active' => 'nullable|string',
+            'date' => 'required|string',
+            'start_time' => 'required',
+            'end_time' => 'required',
 
         ]);
 
 
 
         $user = AppointmentsRelation::whereId($request->id)->first();
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->branch_id=$request->branch_id;
-        $user->is_active=$request->is_active;
-        if($request->role_id){
-            $user->roles()->sync([$request->role_id]);
-        }
-        if(isset($user->password)){
-            $user->password=Hash::make($request->password);
-        }
+        $user->end_time=$request->end_time;
+        $user->start_time=$request->start_time;
+        $user->date=$request->date;
+        $user->is_deleted=$request->is_deleted;
+        $user->states=$request->states;
         $user->save();
 
 

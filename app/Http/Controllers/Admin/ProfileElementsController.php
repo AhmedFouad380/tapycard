@@ -71,16 +71,36 @@ class ProfileElementsController extends Controller
         ]);
 
 
+        if(is_array($request->value)){
+            foreach($request->value as $value) {
+                $data = new ProfileElement();
+                $data->profile_id = $request->profile_id;
+                $data->type = $request->type;
+                $data->sub_type = $request->sub_type;
+                $data->value = $value;
+                $data->ar_title = $request->ar_title;
+                $data->en_title = $request->en_title;
+                $data->is_active = $request->is_active;
+                $data->save();
+            }
+        }else{
+            if($request->type == 'contact' && $request->sub_type ==  'phone'){
+                $value = $request->country_code . $request->value;
+            }else{
+                $value =  $request->value;
 
-        $data =  new ProfileElement();
-        $data->profile_id=$request->profile_id;
-        $data->type=$request->type;
-        $data->sub_type=$request->sub_type;
-        $data->value=$request->value;
-        $data->ar_title=$request->ar_title;
-        $data->en_title=$request->en_title;
-        $data->is_active=$request->is_active;
-        $data->save();
+            }
+            $data =  new ProfileElement();
+            $data->profile_id=$request->profile_id;
+            $data->type=$request->type;
+            $data->sub_type=$request->sub_type;
+            $data->value=$value;
+            $data->ar_title=$request->ar_title;
+            $data->en_title=$request->en_title;
+            $data->is_active=$request->is_active;
+            $data->save();
+
+        }
 
         return redirect()->back()->with('message', 'تم الاضافة بنجاح ');
 

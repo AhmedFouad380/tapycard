@@ -8,7 +8,7 @@ return [
     'view' => 'عرض  ',
     'Details'=>'التفاصيل',
 
-    'Settings' => 'الاعدادات ',
+    'Setting' => 'الاعدادات ',
     'User' => 'مستخدم ',
     'Accept&reject' => 'قبول /رفض ',
     'Users_Title' => 'ادارة العملاء ',

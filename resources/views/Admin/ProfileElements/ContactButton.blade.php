@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css" />
+
 <div class="dt-buttons flex-wrap">
 
     <!--end::Filter-->
@@ -61,12 +63,21 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.value')}}</label>
+                                <label class="required fw-bold fs-6 mb-2" id="labelvalue">{{__('lang.phone')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="value"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="" value="" required/>
+                                <div class="row">
+                                    <div class="col-md-3" id="code" >
+                                        <input type="text" name="country_code" id="txtPhone"
+                                               class="form-control form-control-solid mb-3 mb-lg-0"
+                                               placeholder="" value="" />
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="value"
+                                               class="form-control form-control-solid mb-3 mb-lg-0"
+                                               placeholder="" value="" required/>
+                                    </div>
+                                </div>
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->  <!--begin::Input group-->
@@ -75,7 +86,7 @@
                                 <label class="required fw-bold fs-6 mb-2">{{__('lang.type')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select class="form-control" name="sub_type">
+                                <select class="form-control" name="sub_type" id="type">
                                     <option value="phone">Phone</option>
                                     <option value="email">Email</option>
                                     <option value="address">Address</option>
@@ -126,6 +137,7 @@
     </div>
     <!--end::Modal - Add task-->
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
 
 <script type="text/javascript">
 
@@ -212,5 +224,42 @@
                 $('#branche').html(outs);
             });
         }
+    });
+</script>
+<script type="text/javascript">
+    $('#type').on('change',function () {
+        type = $(this).val();
+        if(type == 'email' ){
+            $('#labelvalue').html('{{__('lang.email')}}')
+            document.getElementById("code").style.display = "none";
+        }else if(type == 'phone'){
+            document.getElementById("code").style.display = "block";
+            $('#labelvalue').html('{{__('lang.phone')}}')
+        }
+        else if(type == 'address'){
+            document.getElementById("code").style.display = "none";
+            $('#labelvalue').html('{{__('lang.address')}}')
+        }else{
+            document.getElementById("code").style.display = "none";
+            $('#labelvalue').html('{{__('lang.url')}}')
+
+        }
+    })
+    $(function() {
+        var code = "+20"; // Assigning value from model.
+        $('#txtPhone').val(code);
+        $('#txtPhone').intlTelInput({
+            autoHideDialCode: true,
+            autoPlaceholder: "ON",
+            dropdownContainer: document.body,
+            formatOnDisplay: true,
+            hiddenInput: "full_number",
+            initialCountry: "auto",
+            nationalMode: true,
+            placeholderNumberType: "MOBILE",
+            preferredCountries: ['US'],
+            separateDialCode: false
+        });
+        console.log(code)
     });
 </script>

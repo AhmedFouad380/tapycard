@@ -162,7 +162,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-5">
                                     <a href="{{url('Setting')}}" class="menu-link px-5">
-                                        <span class="menu-text">{{__('Setting')}}</span>
+                                        <span class="menu-text">{{__('lang.Setting')}}</span>
                                     </a>
                                 </div>
                                 <!--end::Menu item-->

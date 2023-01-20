@@ -44,7 +44,7 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                     <!--begin::Form-->
-                    <form id="" class="form" method="post" action="{{url('store-Profile_elements')}}">
+                    <form id="" enctype="multipart/form-data"  class="form" method="post" action="{{url('store-Profile_elements')}}">
                     @csrf
                     <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7"
@@ -81,6 +81,19 @@
                                        placeholder="" value="" required/>
                                 <!--end::Input-->
                             </div>
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label class="required fw-bold fs-6 mb-2">{{__('lang.type')}}</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select name="sub_type" class="form-control">
+                                    <option value="youtube">Youtube</option>
+                                    <option value="rumble">Rumble</option>
+                                    <option value="vimeo">Vimeo</option>
+                                </select>
+                                <!--end::Input-->
+                            </div>
+
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
                                 <label class="required fw-bold fs-6 mb-2">{{__('lang.url')}}</label>

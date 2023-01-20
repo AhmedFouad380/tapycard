@@ -1,6 +1,8 @@
 @extends('layout.layout')
 
 @section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @endsection
 
 @section('style')
@@ -26,7 +28,7 @@
                     <li class="breadcrumb-item text-muted">
                         <a href="{{url('/')}}" class="text-muted">{{__('lang.Dashboard')}}</a>
                     </li>
-                    <li class="breadcrumb-item text-muted">{{__('lang.Admins')}}</li>
+                    <li class="breadcrumb-item text-muted">{{__('lang.ExchangeContact')}}</li>
                     <li class="breadcrumb-item text-muted">{{__('lang.Users_Edit')}}</li>
 
                 </ul>
@@ -138,7 +140,7 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form id="kt_account_profile_details_form" action="{{url('update-Admin')}}" class="form"
+                    <form id="kt_account_profile_details_form" action="{{url('update-ExchangeContact')}}" class="form"
                           method="post">
                     @csrf
                     <!--begin::Card body-->
@@ -183,41 +185,24 @@
                                 <!--end::Input-->
                             </div>
 
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.password')}}</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="password" name="password"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="" value="" />
-                                <!--end::Input-->
-                            </div>
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.Confirm password')}}</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="password" name="password_confirmation"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="" value=""/>
-                                <!--end::Input-->
-                            </div>
                             <!--end::Input group-->
                             <!--end::Input group-->
+                            @if(Auth::guard('admin')->check())
+
                             <div class="fv-row mb-7">
                                 <div
                                     class="form-check form-switch form-check-custom form-check-solid">
-                                    <label class="form-check-label" for="flexSwitchDefault">{{__('lang.active')}}
+                                    <label class="form-check-label" for="flexSwitchDefault">{{__('lang.Delete')}}
                                         ؟</label>
-                                    <input class="form-check-input" name="is_active" type="hidden"
-                                           value="inactive" id="flexSwitchDefault"/>
+                                    <input class="form-check-input" name="is_deleted" type="hidden"
+                                           value="0" id="flexSwitchDefault"/>
                                     <input class="form-check-input form-control form-control-solid mb-3 mb-lg-0"
-                                           name="is_active" type="checkbox"
-                                           value="active" id="flexSwitchDefault"
-                                           @if($employee->is_active == 'active') checked @endif />
+                                           name="is_deleted" type="checkbox"
+                                           value="1" id="flexSwitchDefault"
+                                           @if($employee->is_deleted == 1) checked @endif />
                                 </div>
                             </div>
+                            @endif
                             <!--end::Input group-->
 
 
@@ -243,6 +228,7 @@
 @endsection
 
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         $('#phone').change( function () {

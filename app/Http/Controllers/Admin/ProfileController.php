@@ -58,7 +58,7 @@ class ProfileController extends Controller
             })
             ->addColumn('actions', function ($row) {
                 $actions = ' <a href="' . url("Profile_elements/" . $row->id) . '" class="btn btn-danger">'.__('lang.elements').' <i class="bi bi-eye"></i>  </a>';
-                $actions .= ' <a href="' . url("Admin-edit/" . $row->id) . '" class="btn btn-active-light-info">'.__('lang.Edit').' <i class="bi bi-pencil-fill"></i>  </a>';
+                $actions .= ' <a href="' . url("Profile-edit/" . $row->id) . '" class="btn btn-active-light-info">'.__('lang.Edit').' <i class="bi bi-pencil-fill"></i>  </a>';
 
                 return $actions;
 
@@ -241,7 +241,7 @@ class ProfileController extends Controller
     public function destroy(Request $request)
     {
         try {
-            Profile::whereIn('id', $request->id)->delete();
+            Profile::whereIn('id', $request->id)->update(['is_deleted'=>1]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed']);
         }

@@ -152,11 +152,8 @@ class ExhangeContactController extends Controller
     {
         $data = $this->validate(request(), [
             'name' => 'required|string',
-            'id' => 'required|exists:users,id',
-            'email' => 'required|email|unique:admins,email,' . $request->id,
-            'password' => 'nullable|confirmed',
-            'phone' => 'required|min:8|unique:admins,phone,' . $request->id,
-            'is_active' => 'nullable|string',
+            'email' => 'required',
+            'phone' => 'required',
 
         ]);
 
@@ -165,14 +162,8 @@ class ExhangeContactController extends Controller
         $user = ExchangeContact::whereId($request->id)->first();
         $user->name=$request->name;
         $user->email=$request->email;
-        $user->branch_id=$request->branch_id;
-        $user->is_active=$request->is_active;
-        if($request->role_id){
-            $user->roles()->sync([$request->role_id]);
-        }
-        if(isset($user->password)){
-            $user->password=Hash::make($request->password);
-        }
+        $user->phone=$request->email;
+        $user->is_deleted=$request->is_deleted;
         $user->save();
 
 

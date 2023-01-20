@@ -44,7 +44,7 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                     <!--begin::Form-->
-                    <form id="" class="form" method="post" action="{{url('store-Profile_elements')}}">
+                    <form id="" enctype="multipart/form-data" class="form" method="post" action="{{url('store-Profile_elements')}}">
                     @csrf
                     <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7"
@@ -86,7 +86,7 @@
                                 <label class="required fw-bold fs-6 mb-2">{{__('lang.image')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="file" name="value"
+                                <input type="file" name="value[]" multiple
                                        class="form-control form-control-solid mb-3 mb-lg-0"
                                        placeholder="" value="" required/>
                                 <!--end::Input-->

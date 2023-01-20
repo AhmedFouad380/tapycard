@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css" />
+
 <div class="dt-buttons flex-wrap">
 
     <!--end::Filter-->
@@ -59,14 +61,16 @@
                             <input type="hidden" value="social" name="type">
                             <input type="hidden" value="{{$id}}" name="profile_id">
                             <!--begin::Input group-->
+
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">{{__('lang.url')}}</label>
+                                <label class="required fw-bold fs-6 mb-2" id="">{{__('lang.url')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="value"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="" value="" required/>
+
+                                        <input type="text" name="value"
+                                               class="form-control form-control-solid mb-3 mb-lg-0"
+                                               placeholder="" value="" required/>
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->  <!--begin::Input group-->
@@ -75,7 +79,7 @@
                                 <label class="required fw-bold fs-6 mb-2">{{__('lang.type')}}</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select class="form-control" name="sub_type">
+                                <select class="form-control" name="sub_type" >
                                     <option value="facebook">Facebook</option>
                                     <option value="instagram">Instagram</option>
                                     <option value="twitter">Twitter</option>
@@ -134,8 +138,20 @@
     <!--end::Modal - Add task-->
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
 
+<script type="text/javascript">
+    $('#type').on('change',function () {
+       type = $(this).val();
+       if(type == 'tiktok' || type == 'instagram' || type == 'twitter' || type == 'snapchat'){
+           $('#labelvalue').html('{{__('lang.UserName')}}')
+       }else if(type == 'whatsapp'){
+           $('#labelvalue').html('{{__('lang.phone')}}')
+       }else{
+           $('#labelvalue').html('{{__('lang.url')}}')
+
+       }
+    })
     $("#delete").on("click", function () {
         var dataList = [];
         $("input:checkbox:checked").each(function (index) {
@@ -219,5 +235,27 @@
                 $('#branche').html(outs);
             });
         }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        var code = "+20"; // Assigning value from model.
+        $('#txtPhone').val(code);
+        $('#txtPhone').intlTelInput({
+            autoHideDialCode: true,
+            autoPlaceholder: "ON",
+            dropdownContainer: document.body,
+            formatOnDisplay: true,
+            hiddenInput: "full_number",
+            initialCountry: "auto",
+            nationalMode: true,
+            placeholderNumberType: "MOBILE",
+            preferredCountries: ['US'],
+            separateDialCode: false
+        });
+        console.log(code)
     });
 </script>

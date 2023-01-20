@@ -72,7 +72,7 @@ class AdminController extends Controller
     {
         $data = $this->validate(request(), [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:admins',
             'password' => 'required|confirmed',
             'phone' => 'required|unique:admins|min:8',
             'is_active' => 'nullable|string',
@@ -83,13 +83,9 @@ class AdminController extends Controller
         $user = new Admin;
         $user->name=$request->name;
         $user->phone=$request->phone;
-        $user->branch_id=$request->branch_id;
         $user->password=Hash::make($request->password);
         $user->email=$request->email;
         $user->is_active=$request->is_active;
-        if($request->role_id){
-            $user->roles()->sync([$request->role_id]);
-        }
         $user->save();
 
         return redirect()->back()->with('message', 'تم الاضافة بنجاح ');
@@ -144,11 +140,7 @@ class AdminController extends Controller
         $user = Admin::whereId($request->id)->first();
         $user->name=$request->name;
         $user->email=$request->email;
-        $user->branch_id=$request->branch_id;
         $user->is_active=$request->is_active;
-        if($request->role_id){
-            $user->roles()->sync([$request->role_id]);
-        }
         if(isset($user->password)){
             $user->password=Hash::make($request->password);
         }

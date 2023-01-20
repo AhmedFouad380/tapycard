@@ -1,6 +1,8 @@
 @extends('layout.layout')
 @section('title',__('lang.elements'))
 @section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css" />
+
 @endsection
 
 @section('style')
@@ -290,6 +292,7 @@
 
                                                     <th class="min-w-125px">{{__('lang.ar_title')}}</th>
                                                     <th class="min-w-125px">{{__('lang.en_title')}}</th>
+                                                    <th class="min-w-125px">{{__('lang.type')}}</th>
                                                     <th class="min-w-125px">{{__('lang.url')}}</th>
                                                     <th class="min-w-125px">{{__('lang.Actions')}}</th>
                                                 </tr>
@@ -586,6 +589,7 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
 
         <script type="text/javascript">
             $(function () {
@@ -748,6 +752,7 @@
                         {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                         {data: 'ar_title', name: 'ar_title', "searchable": true, "orderable": true},
                         {data: 'en_title', name: 'en_title', "searchable": true, "orderable": true},
+                        {data: 'sub_type', name: 'sub_type', "searchable": true, "orderable": true},
                         {data: 'value', name: 'value', "searchable": true, "orderable": true},
                         {data: 'actions', name: 'actions', "searchable": true, "orderable": true},
 
@@ -843,7 +848,6 @@
                 });
             });
         </script>
-
 
 @endsection
 
